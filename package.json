@@ -1,0 +1,44 @@
+{
+  "name": "@star-one/git-tools",
+  "version": "1.0.0",
+  "description": "基于node git命令工具，优化git提交信息",
+  "keywords": [
+    "git",
+    "node"
+  ],
+  "repository": {
+    "url": "https://github.com/WakerCN/git-tools"
+  },
+  "author": {
+    "name": "魏威",
+    "email": "1209562577@qq.com",
+    "url": "https://www.yuque.com/star-one"
+  },
+  "packageManager": "pnpm@8.6.12",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "license": "ISC",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "bin": {
+    "sogt": "dist/es/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@types/node": "^20.4.8",
+    "rollup": "^3.27.2",
+    "rollup-plugin-dts": "^5.3.1",
+    "tslib": "^2.6.1",
+    "typescript": "^5.1.6"
+  }
+}

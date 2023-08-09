@@ -1,0 +1,8 @@
+{
+  "include": ["rollup.config.ts", "src/**/*.ts"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES5",
+    "moduleResolution": "Node"
+  }
+}

@@ -1,8 +1,15 @@
 {
-  "include": ["rollup.config.ts", "src/**/*.ts"],
+  "include": ["src/**/*.ts", "rollup.config.ts"],
   "compilerOptions": {
     "module": "ESNext",
     "target": "ES5",
-    "moduleResolution": "Node"
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    "outDir": "dist",
+
+    "declaration": true,
+    "declarationDir": "dist/types"
   }
 }

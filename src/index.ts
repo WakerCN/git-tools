@@ -1,11 +1,23 @@
 #! /usr/bin/env node
 
-import { log } from "console";
-import { EmojiList } from "./const";
+import { Command } from "commander";
+import pkg from "../package.json";
 
-export function sum(a: number, b: number) {
-  log("EmojiList", EmojiList);
-  return a + b;
+/** 程序入口 */
+function main() {
+  const program = new Command();
+
+  program
+    .name("sogt")
+    .version(pkg.version, "-v, --version", "版本号")
+    .helpOption("-h, --help", "帮助中心");
+
+  program
+    .option("-c, --commit", "进行 git commmit")
+    .option("-t, --tag", "进行 git tag")
+    .option("-p, --push", "进行 git push");
+
+  program.parse(process.argv);
 }
 
-sum(1, 2);
+export default main();

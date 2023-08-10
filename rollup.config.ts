@@ -1,40 +1,36 @@
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
-import resolve from "@rollup/plugin-node-resolve";
-import { dts } from "rollup-plugin-dts";
+import commonjs from "@rollup/plugin-commonjs";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import shebang from "rollup-plugin-preserve-shebang";
+import json from "@rollup/plugin-json";
 
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-const pkg = require("./package.json");
+import { readFileSync } from "node:fs";
+const pkg = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url)).toString()
+);
 
 export default defineConfig([
   {
     input: "src/index.ts",
-    output: [
-      {
-        dir: "dist/lib",
-        format: "cjs",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        sourcemap: true
-      },
-      {
-        dir: "dist/es",
-        format: "es",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        sourcemap: true
-      }
-    ],
-    plugins: [resolve(), typescript()]
-  },
-  {
-    input: "src/index.ts",
     output: {
-      format: "es",
-      dir: "dist/types",
-      preserveModules: true
+      dir: "dist",
+      format: "esm",
+      sourcemap: true,
+      preserveModules: true,
+      preserveModulesRoot: "src"
     },
-    plugins: [dts()]
+
+    external: Object.keys(pkg.dependencies),
+
+    plugins: [
+      commonjs(),
+      nodeResolve(),
+      json(),
+      typescript(),
+      shebang({
+        shebang: "#! /usr/bin/env node"
+      })
+    ]
   }
 ]);

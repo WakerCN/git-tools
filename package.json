@@ -20,24 +20,26 @@
   },
   "license": "ISC",
   "type": "module",
-  "main": "dist/lib/index.js",
-  "module": "dist/es/index.js",
-  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "tsc:esm": "npx rimraf dist && npx tsc",
+    "rollup:build": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "rollup:watch": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript -w"
+  },
   "bin": {
     "sogt": "dist/es/index.js"
   },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin typescript"
+  "dependencies": {
+    "commander": "^11.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-typescript": "^11.1.2",
-    "@types/node": "^20.4.8",
-    "rollup": "^3.27.2",
-    "rollup-plugin-dts": "^5.3.1",
+    "@types/node": "^18.17.0",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.28.0",
+    "rollup-plugin-preserve-shebang": "^1.0.1",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6"
   }

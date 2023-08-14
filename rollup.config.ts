@@ -21,7 +21,7 @@ export default defineConfig([
       preserveModulesRoot: "src"
     },
 
-    external: [...Object.keys(pkg.dependencies), "tslib"],
+    external: [...Object.keys(pkg.dependencies)],
 
     plugins: [
       nodeResolve(),

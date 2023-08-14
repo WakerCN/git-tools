@@ -23,6 +23,9 @@ dependencies:
   simple-git:
     specifier: ^3.19.1
     version: 3.19.1
+  tslib:
+    specifier: ^2.6.1
+    version: 2.6.1
 
 devDependencies:
   '@rollup/plugin-commonjs':
@@ -52,9 +55,6 @@ devDependencies:
   rollup-plugin-preserve-shebang:
     specifier: ^1.0.1
     version: 1.0.1
-  tslib:
-    specifier: ^2.6.1
-    version: 2.6.1
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
@@ -616,7 +616,6 @@ packages:
 
   /tslib@2.6.1:
     resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
-    dev: true
 
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}

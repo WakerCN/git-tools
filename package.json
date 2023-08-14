@@ -23,8 +23,12 @@
   "scripts": {
     "tsc:esm": "npx rimraf dist && npx tsc",
     "rollup:build": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "rollup:watch": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript -w"
+    "rollup:watch": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript -w",
+    "prepublish": "pnpm rollup:build"
   },
+  "files": [
+    "dist"
+  ],
   "bin": {
     "sogt": "dist/es/index.js"
   },

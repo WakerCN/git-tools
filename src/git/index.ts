@@ -48,8 +48,8 @@ export class GitMananger {
     const { staged, created, modified, deleted } = statusInfo;
     // prettier-ignore
     log.message(dedent`
-      当前分支: ${color.green(color.bold(statusInfo.current))} ， ahead: ${statusInfo.ahead} behind: ${statusInfo.behind}
-      暂存文件
+      当前分支：${color.green(color.bold(statusInfo.current))}，ahead: ${statusInfo.ahead}，behind: ${statusInfo.behind}
+      暂存文件：
       ${color.bold(color.bgGreen(' A 新增 '))} ${intersection(staged, created).length}
       ${color.bold(color.bgYellow(' M 修改 '))} ${intersection(staged, modified).length}
       ${color.bold(color.bgRed(' D 删除 '))} ${intersection(staged, deleted).length}

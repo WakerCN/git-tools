@@ -1,15 +1,28 @@
 # git-tools
 
-@star-one/git-tools
-
-**TODO**
+**@star-one/git-tools**
 
 # 安装
 
-```bash
-# 使用npm安装
-npm install -g @star-one/git-tools
-```
+- 全局安装
+
+  ```bash
+  # 使用npm安装
+  npm install -g @star-one/git-tools
+  ```
+
+  安装后会在全局注册 `sogt` 命令
+
+如果不想全局安装，也可以选择在项目中安装
+
+- 项目安装
+
+  ```bash
+  # 使用npm安装
+  npm install -D @star-one/git-tools
+  # 使用npx，来执行命令
+  npx sogt commit
+  ```
 
 # 基本使用
 

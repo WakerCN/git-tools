@@ -7,9 +7,9 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
 
-    "outDir": "dist",
+    "outDir": "dist/es",
 
     "declaration": true,
-    "declarationDir": "dist/types"
+    "declarationDir": "dist/es/types"
   }
 }

@@ -14,18 +14,18 @@ export default defineConfig([
   {
     input: "src/index.ts",
     output: {
-      dir: "dist",
+      dir: "dist/es",
       format: "esm",
       sourcemap: true,
       preserveModules: true,
       preserveModulesRoot: "src"
     },
 
-    external: Object.keys(pkg.dependencies),
+    external: [...Object.keys(pkg.dependencies), "tslib"],
 
     plugins: [
-      commonjs(),
       nodeResolve(),
+      commonjs(),
       json(),
       typescript(),
       shebang({

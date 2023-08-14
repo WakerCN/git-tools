@@ -33,7 +33,7 @@
     "dist"
   ],
   "bin": {
-    "sogt": "dist/es/index.js"
+    "sogt": "./dist/es/index.js"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

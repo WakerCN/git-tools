@@ -1,6 +1,6 @@
 {
   "name": "@star-one/git-tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于node git命令工具，优化git提交信息",
   "publishConfig": {
     "access": "public"
@@ -27,7 +27,7 @@
     "tsc:esm": "npx rimraf dist && npx tsc",
     "rollup:build": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "rollup:watch": "npx rimraf dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript -w",
-    "prepublish": "pnpm rollup:build"
+    "prepublish": "npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "files": [
     "dist"

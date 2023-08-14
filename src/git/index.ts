@@ -1,11 +1,24 @@
-import { SimpleGit, SimpleGitOptions, simpleGit } from "simple-git";
+import * as prompts from "@clack/prompts";
+import dedent from "dedent";
+import { intersection } from "lodash-es";
+import { SimpleGitOptions, SimpleGit, simpleGit } from "simple-git";
+
+const { log } = prompts;
+
+interface SoGitManager {
+  commitMsg?: (msg: string) => Promise<void>;
+  showStatus?: () => Promise<void>;
+}
 
 export class GitMananger {
   public constructor() {}
 
+  /** simpleGit 实例对象 */
   private static sgInstance: SimpleGit;
+  /** 本身自己实例对象 */
+  private static instance: GitMananger;
 
-  public getInstance(): SimpleGit {
+  public getInstance(): GitMananger {
     if (!GitMananger.sgInstance) {
       const options: Partial<SimpleGitOptions> = {
         baseDir: process.cwd(),
@@ -15,14 +28,17 @@ export class GitMananger {
       };
       GitMananger.sgInstance = simpleGit(options);
     }
-    return GitMananger.sgInstance;
+    if (!GitMananger.instance) {
+      GitMananger.instance = new GitMananger();
+    }
+    return GitMananger.instance;
   }
 
   /**
    * 将git stash的文件，进行git commit
    * @param msg 提交信息
    */
-  public commit(msg: string) {
+  public async commitMsg(msg: string) {
     GitMananger.sgInstance.commit(msg);
   }
 
@@ -30,5 +46,15 @@ export class GitMananger {
   public isGitDir() {}
 
   /** 展示git信息 */
-  public showStatus() {}
+  public async showStatus() {
+    const statusInfo = await GitMananger.sgInstance.status();
+    const { staged, created, modified, deleted } = statusInfo;
+    // prettier-ignore
+    log.message(dedent`
+      当前分支: ${statusInfo.current} ahead: ${statusInfo.ahead} behind: ${statusInfo.behind}
+      A: ${intersection(staged, created).length}
+      M: ${intersection(staged, modified).length}
+      D: ${intersection(staged, deleted).length}
+    `);
+  }
 }

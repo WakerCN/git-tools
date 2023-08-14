@@ -4,6 +4,7 @@ import { Command } from "commander";
 import color from "picocolors";
 import _ from "lodash-es";
 import { TypeInfoList } from "./const";
+import { GitMananger } from "../../git";
 
 const commitCommand = new Command();
 
@@ -16,7 +17,8 @@ commitCommand
   .action(commitAction);
 
 async function commitAction(options, command) {
-  intro(color.bgCyan(" hello sogt commit "));
+  const gitInstance = new GitMananger().getInstance();
+  await gitInstance.showStatus();
   const { type, scope, detail } = await prompts.group(
     {
       type: () =>
@@ -55,6 +57,22 @@ async function commitAction(options, command) {
     (scope ? ` <${scope}>` : "") +
     (detail ? ` ${detail}` : "");
   log.step(`git commit msg 如下：\n${commitMsg}`);
+  const { promptResult } = await prompts.group(
+    {
+      promptResult: () =>
+        prompts.confirm({
+          message: "是否继续提交?"
+        })
+    },
+    {
+      onCancel: (res) => {
+        prompts.cancel("git commit 已取消");
+        process.exit(0);
+      }
+    }
+  );
+  if (promptResult) {
+  }
   outro(color.bgCyan(" end sogt commit "));
 }
 

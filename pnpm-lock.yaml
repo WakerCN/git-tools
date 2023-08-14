@@ -11,6 +11,9 @@ dependencies:
   commander:
     specifier: ^11.0.0
     version: 11.0.0
+  dedent:
+    specifier: ^1.5.1
+    version: 1.5.1
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -292,6 +295,15 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: false
+
+  /dedent@1.5.1:
+    resolution: {integrity: sha512-+LxW+KLWxu3HW3M2w2ympwtqPrqYRzU8fqi6Fhd18fBALe15blJPI/I4+UHveMVG6lJqB4JNd4UG0S5cnVHwIg==}
+    peerDependencies:
+      babel-plugin-macros: ^3.1.0
+    peerDependenciesMeta:
+      babel-plugin-macros:
+        optional: true
     dev: false
 
   /deepmerge@4.3.1:

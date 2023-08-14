@@ -1,10 +1,10 @@
-import { intro, outro, select, text, spinner, log } from "@clack/prompts";
 import * as prompts from "@clack/prompts";
+import { log, outro } from "@clack/prompts";
 import { Command } from "commander";
-import color from "picocolors";
 import _ from "lodash-es";
-import { TypeInfoList } from "./const";
+import color from "picocolors";
 import { GitMananger } from "../../git";
+import { TypeInfoList } from "./const";
 
 const commitCommand = new Command();
 
@@ -18,7 +18,22 @@ commitCommand
 
 async function commitAction(options, command) {
   const gitInstance = new GitMananger().getInstance();
+
+  // ========== git status信息确认 start ========== //
   await gitInstance.showStatus();
+  const isConfirm = await prompts.confirm({
+    message: "提交详情如上，是否继续提交？"
+  });
+  if (prompts.isCancel(isConfirm)) {
+    prompts.cancel("git commit 已取消");
+    process.exit(0);
+  }
+  if (!isConfirm) {
+    return outro(color.bgCyan(" end sogt commit "));
+  }
+  // =========== git status信息确认 end =========== //
+
+  // ========== 提交形象prompt start ========== //
   const { type, scope, detail } = await prompts.group(
     {
       type: () =>
@@ -56,10 +71,15 @@ async function commitAction(options, command) {
     `${typeInfo.emoji} ${typeInfo.type}` +
     (scope ? ` <${scope}>` : "") +
     (detail ? ` ${detail}` : "");
-  log.step(`git commit msg 如下：\n${commitMsg}`);
-  const { promptResult } = await prompts.group(
+
+  log.message(`git commit msg 如下：\n${commitMsg}`);
+  // =========== 提交形象prompt end =========== //
+
+  /* 最后进行一遍确认
+  =========================================== */
+  const { isContinueCommit } = await prompts.group(
     {
-      promptResult: () =>
+      isContinueCommit: () =>
         prompts.confirm({
           message: "是否继续提交?"
         })
@@ -71,8 +91,12 @@ async function commitAction(options, command) {
       }
     }
   );
-  if (promptResult) {
+  if (!isContinueCommit) {
+    return outro(color.bgCyan(" end sogt commit "));
+  } else {
+    await gitInstance.commitMsg(commitMsg);
   }
+
   outro(color.bgCyan(" end sogt commit "));
 }
 

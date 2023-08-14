@@ -2,22 +2,19 @@ import * as prompts from "@clack/prompts";
 import dedent from "dedent";
 import { intersection } from "lodash-es";
 import { SimpleGitOptions, SimpleGit, simpleGit } from "simple-git";
+import color from "picocolors";
 
 const { log } = prompts;
-
-interface SoGitManager {
-  commitMsg?: (msg: string) => Promise<void>;
-  showStatus?: () => Promise<void>;
-}
 
 export class GitMananger {
   public constructor() {}
 
   /** simpleGit 实例对象 */
   private static sgInstance: SimpleGit;
-  /** 本身自己实例对象 */
+  /** 本身实例对象 */
   private static instance: GitMananger;
 
+  /** 获取实例的时候初始化sgIntance */
   public getInstance(): GitMananger {
     if (!GitMananger.sgInstance) {
       const options: Partial<SimpleGitOptions> = {
@@ -51,10 +48,11 @@ export class GitMananger {
     const { staged, created, modified, deleted } = statusInfo;
     // prettier-ignore
     log.message(dedent`
-      当前分支: ${statusInfo.current} ahead: ${statusInfo.ahead} behind: ${statusInfo.behind}
-      A: ${intersection(staged, created).length}
-      M: ${intersection(staged, modified).length}
-      D: ${intersection(staged, deleted).length}
+      当前分支: ${color.green(color.bold(statusInfo.current))} ， ahead: ${statusInfo.ahead} behind: ${statusInfo.behind}
+      暂存文件
+      ${color.bold(color.bgGreen(' A 新增 '))} ${intersection(staged, created).length}
+      ${color.bold(color.bgYellow(' M 修改 '))} ${intersection(staged, modified).length}
+      ${color.bold(color.bgRed(' D 删除 '))} ${intersection(staged, deleted).length}
     `);
   }
 }

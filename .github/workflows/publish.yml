@@ -2,8 +2,6 @@ name: publish package
 
 on:
   push:
-    branch:
-      - main
     tags:
       - v**
 

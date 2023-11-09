@@ -1,6 +1,6 @@
 {
   "name": "@star-one/git-tools",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "基于node git命令工具，优化git提交信息",
   "publishConfig": {
     "access": "public"
@@ -39,6 +39,7 @@
     "@clack/prompts": "^0.7.0",
     "commander": "^11.0.0",
     "dedent": "^1.5.1",
+    "fs-extra": "^11.1.1",
     "lodash-es": "^4.17.21",
     "picocolors": "^1.0.0",
     "simple-git": "^3.19.1",
@@ -49,12 +50,12 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-typescript": "^11.1.2",
+    "@types/fs-extra": "^11.0.1",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^18.17.0",
     "rimraf": "^5.0.1",
     "rollup": "^3.28.0",
     "rollup-plugin-preserve-shebang": "^1.0.1",
-
     "typescript": "^5.1.6"
   }
 }

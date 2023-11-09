@@ -1,8 +1,9 @@
 import * as prompts from "@clack/prompts";
 import dedent from "dedent";
 import { intersection } from "lodash-es";
-import { SimpleGitOptions, SimpleGit, simpleGit } from "simple-git";
 import color from "picocolors";
+import { SimpleGit, SimpleGitOptions, simpleGit } from "simple-git";
+import { isGitCwd } from "../utils/git";
 
 const { log } = prompts;
 
@@ -15,7 +16,12 @@ export class GitMananger {
   private static instance: GitMananger;
 
   /** 获取实例的时候初始化sgIntance */
-  public getInstance(): GitMananger {
+  public static getInstance(): GitMananger {
+    if (!isGitCwd()) {
+      // throwErrorWithOutStackTrace("当前目录不是git仓库");
+      throw new Error("当前目录不是git仓库");
+    }
+
     if (!GitMananger.sgInstance) {
       const options: Partial<SimpleGitOptions> = {
         baseDir: process.cwd(),
@@ -38,9 +44,6 @@ export class GitMananger {
   public async commitMsg(msg: string) {
     GitMananger.sgInstance.commit(msg);
   }
-
-  /** 判断当前目录是否是git目录 */
-  public isGitDir() {}
 
   /** 展示git信息 */
   public async showStatus() {

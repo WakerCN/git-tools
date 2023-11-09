@@ -17,7 +17,12 @@ commitCommand
   .action(commitAction);
 
 async function commitAction(options, command) {
-  const gitInstance = new GitMananger().getInstance();
+  let gitInstance;
+  try {
+    gitInstance = GitMananger.getInstance();
+  } catch (error) {
+    return prompts.cancel("当前目录不是git目录");
+  }
 
   // ========== git status信息确认 start ========== //
   await gitInstance.showStatus();

@@ -1,6 +1,6 @@
 {
   "name": "@star-one/git-tools",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "基于node git命令工具，优化git提交信息",
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,13 @@
-import fs from "fs-extra";
-import path from "path";
+import cp from "child_process";
 
 /** 判断process.cwd()是否是git目录 */
 export const isGitCwd = (): boolean => {
-  return fs.existsSync(path.resolve(process.cwd(), ".git"));
+  const result = cp.spawnSync(
+    "git",
+    ["rev-parse", "--is-inside-work-tree"],
+    {
+      cwd: process.cwd()
+    }
+  );
+  return result.stdout.toString().trim() === "true";
 };

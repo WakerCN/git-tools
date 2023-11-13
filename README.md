@@ -2,6 +2,8 @@
 
 **@star-one/git-tools**
 
+![image](assets/sogt-c.gif)
+
 # 安装
 
 - 全局安装

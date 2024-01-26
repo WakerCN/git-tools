@@ -42,7 +42,7 @@ export class GitMananger {
    * @param msg 提交信息
    */
   public async commitMsg(msg: string) {
-    GitMananger.sgInstance.commit(msg);
+    await GitMananger.sgInstance.commit(msg);
   }
 
   /** 展示git信息 */

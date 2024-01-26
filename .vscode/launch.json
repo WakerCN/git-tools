@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "测试子文件git目录判断",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/src/git",
+      "preLaunchTask": {
+        "type": "npm",
+        "script": "rollup:build"
+      },
+      "program": "${workspaceFolder}/src/index.ts",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "args": ["c"],
+      "console": "integratedTerminal"
+    }
+  ]
+}

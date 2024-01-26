@@ -102,7 +102,13 @@ async function commitAction(options, command) {
   if (!isContinueCommit) {
     return outro(color.bgCyan(" end sogt commit "));
   } else {
-    await gitInstance.commitMsg(commitMsg);
+    try {
+      await gitInstance.commitMsg(commitMsg);
+    } catch (error) {
+      prompts.cancel("git commit 失败");
+      console.log(error);
+      process.exit(0);
+    }
   }
 
   outro(color.bgCyan(" end sogt commit "));
